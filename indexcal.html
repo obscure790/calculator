@@ -1,0 +1,208 @@
+<?php
+    // PHP variables to hold state, if necessary
+    $result = null;
+    $expression = '';
+
+    // Step 2: PHP handles the calculation when the form is submitted (= is pressed)
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['expression'])) {
+        $expression = $_POST['expression'];
+        
+        // --- SAFE CALCULATION LOGIC GOES HERE ---
+        // For security, you should NOT use eval() in PHP on user input.
+        // Instead, use a tokenizer, regex, or a dedicated math parser.
+         try {
+            // PHP's eval() executes the string as PHP code, calculating the expression
+            $result = eval("return ($expression);");
+        } catch (Throwable $e) {
+        // Placeholder for secure calculation:
+        // $result = safe_calculate($expression);
+        $result = "Result of $expression"; // Replace this line with actual safe calculation
+    }
+}
+?>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="indexcal.css" />
+    <title>My Calculator</title>
+  </head>
+  <body>
+    <header>
+      <h1>Undisputed</h1>
+
+      <ul>
+        <li><a href="indexlogin.php">Login</a></li>
+        <li><a href="indexcal.php">Calculator</a></li>
+      </ul>
+    </header>
+    <hr />
+
+    <div id="d-cal-div">
+      <div id="butt-del">
+        <input
+          type="text"
+          id="cal-input"
+          name="expression"
+          value="<?php echo htmlspecialchars($expression ?: $result); ?>"
+          required
+          readonly
+        />>
+        <input
+          type="button"
+          value="del"
+          class="del-butt"
+          onclick="deleteLast()"
+        />
+      </div>
+
+      <div id="butt-div">
+        <button type="button" id="clear" class="butt" onclick="clearDisplay()">
+          C
+        </button>
+        <button
+          type="button"
+          id="signs"
+          class="butt"
+          onclick="appendToDisplay('( )')"
+        >
+          ( )
+        </button>
+        <button
+          type="button"
+          id="signs"
+          class="butt"
+          onclick="appendToDisplay('%')"
+        >
+          %
+        </button>
+        <button
+          type="button"
+          id="signs"
+          class="butt"
+          onclick="appendToDisplay('/')"
+        >
+          /
+        </button>
+
+        <button type="button" class="butt" onclick="appendToDisplay('7')">
+          7
+        </button>
+        <button type="button" class="butt" onclick="appendToDisplay('8')">
+          8
+        </button>
+        <button type="button" class="butt" onclick="appendToDisplay('9')">
+          9
+        </button>
+        <button
+          type="button"
+          id="signs"
+          class="butt"
+          onclick="appendToDisplay('*')"
+        >
+          *
+        </button>
+
+        <button type="button" class="butt" onclick="appendToDisplay('4')">
+          4
+        </button>
+        <button type="button" class="butt" onclick="appendToDisplay('5')">
+          5
+        </button>
+        <button type="button" class="butt" onclick="appendToDisplay('6')">
+          6
+        </button>
+        <button
+          type="button"
+          id="signs"
+          class="butt"
+          onclick="appendToDisplay('-')"
+        >
+          -
+        </button>
+
+        <button type="button" class="butt" onclick="appendToDisplay('1')">
+          1
+        </button>
+        <button type="button" class="butt" onclick="appendToDisplay('2')">
+          2
+        </button>
+        <button type="button" class="butt" onclick="appendToDisplay('3')">
+          3
+        </button>
+        <button
+          type="button"
+          id="signs"
+          class="butt"
+          onclick="appendToDisplay('+')"
+        >
+          +
+        </button>
+
+        <button type="button" class="butt" onclick="appendToDisplay('+/-')">
+          +/-
+        </button>
+        <button type="button" class="butt" onclick="appendToDisplay('0')">
+          0
+        </button>
+        <button type="button" class="butt" onclick="appendToDisplay('.')">
+          .
+        </button>
+        <button
+          type="submit"
+          id="equals"
+          class="butt"
+          onclick="calculateResult()"
+        >
+          =
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const display = document.getElementById("cal-input");
+
+      function appendToDisplay(value) {
+        display.value += value;
+      }
+
+      function clearDisplay() {
+        display.value = "";
+      }
+
+      function deleteLast() {
+        display.value = display.value.slice(0, -1);
+      }
+
+      // Before submitting, move the current expression from the readonly display
+      // to the hidden input so PHP can access it.
+      function calculateResult() {
+        try {
+          // eval() works inside native browser JS for quick calculations
+          if (display.value !== "") {
+            display.value = eval(display.value);
+          }
+        } catch (error) {
+          display.value = "Error";
+        }
+      }
+
+      function toggleSign() {
+        if (display.value) {
+          if (display.value.startsWith("-")) {
+            display.value = display.value.slice(1);
+          } else {
+            display.value = "-" + display.value;
+          }
+        }
+      }
+    </script>
+
+    <footer>
+      <hr />
+      <p>&copy;2025 All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>

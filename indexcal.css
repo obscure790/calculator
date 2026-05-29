@@ -1,0 +1,135 @@
+/* My Cal StyleSheet */
+body{
+    font-family:'Times New Roman', Times, serif;
+    background-color: white;
+}
+
+header{
+    background-color: rgb(71, 41, 2);
+    display:flex;
+    position:fixed;
+    top:0;
+    z-index:1000;
+    width:100%;
+    margin:0;
+    padding: 10px;
+    justify-content: space-between;
+}
+header h1{
+    text-shadow: 3px 2px 4px tan;
+    font-weight: bold;
+    color:white;
+}
+header a{
+    text-decoration: none;
+    font-weight: bold;
+    color:white;
+    margin-right:30px;
+}
+header a:hover{
+    color: tan;
+}
+header ul{
+    display:flex;
+    padding-top:17px;
+    gap:25px;
+}
+header li{
+    list-style-type: none;
+}
+
+#cal-input{
+    width:66%;
+    padding:10px;
+    margin-right:10px;
+    margin-bottom:20px;
+    font-size:x-large;
+    font-weight:100;
+}
+
+
+#butt-del{
+    display:flex;
+    justify-content:space-between;
+    margin:9px;
+}
+
+.del-butt{
+    padding:10px;
+    font-size: 15px;
+    font-weight:bold;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius:45%;
+}
+
+#clear{
+    color:red;
+}
+
+#d-cal-div{
+    background-color: rgb(71, 41, 2);
+    border:1px solid black;
+    border-radius:5px;
+    box-shadow: 2px 2px 10px rgb(71, 41, 2);
+    max-width:300px;
+    max-height:380px;
+    margin:30px auto;
+    padding:15px;
+    margin-top:130px;
+}
+
+#butt-div{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    margin:10px;
+    gap:10px; 
+}
+
+.butt{
+    padding:9px;
+    font-size: 15px;
+    font-weight:bold;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius:50%; 
+}
+.butt:hover{
+    background-color: rgb(211, 204, 204);
+}
+
+#signs{
+    color:rgb(113, 167, 32);
+}
+
+#equals{
+    background-color:rgb(113, 167, 32);
+    color:aliceblue;
+}
+
+/* footer */
+footer{
+    text-align:center;
+    margin-top:100px;
+}
+
+/* Styling for the server-generated result */
+#result-popup{
+    background-color: #f7f7f7; /* Light background */
+    color: rgb(71, 41, 2); /* Dark text to contrast with calculator background */
+    padding: 10px;
+    margin-top: 15px; /* Space below the buttons */
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid tan;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Slight shadow to lift it */
+}
+#result-popup p {
+    margin: 0;
+    font-size: small;
+    font-weight: normal;
+}
+
+#result-popup h2 {
+    margin: 5px 0 0 0;
+    font-size: x-large;
+    font-weight: bold;
+}
