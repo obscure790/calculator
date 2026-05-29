@@ -1,26 +1,3 @@
-<?php
-    // PHP variables to hold state, if necessary
-    $result = null;
-    $expression = '';
-
-    // Step 2: PHP handles the calculation when the form is submitted (= is pressed)
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['expression'])) {
-        $expression = $_POST['expression'];
-        
-        // --- SAFE CALCULATION LOGIC GOES HERE ---
-        // For security, you should NOT use eval() in PHP on user input.
-        // Instead, use a tokenizer, regex, or a dedicated math parser.
-         try {
-            // PHP's eval() executes the string as PHP code, calculating the expression
-            $result = eval("return ($expression);");
-        } catch (Throwable $e) {
-        // Placeholder for secure calculation:
-        // $result = safe_calculate($expression);
-        $result = "Result of $expression"; // Replace this line with actual safe calculation
-    }
-}
-?>
-
 <!doctype html>
 <html lang="en">
   <head>
